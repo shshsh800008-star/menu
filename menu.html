@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookies and More — Menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --pink:       #e8a0bf;
+      --pink-light: #f5d0e4;
+      --pink-dark:  #c47fa0;
+      --cream:      #fdf6ee;
+      --brown:      #4a2c1a;
+      --brown-mid:  #7a4a2e;
+      --gold:       #d4a55a;
+      --white:      #ffffff;
+      --shadow:     rgba(74,44,26,0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--pink-light);
+      font-family: 'Tajawal', sans-serif;
+      color: var(--brown);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: var(--white);
+      padding: 24px 20px 18px;
+      text-align: center;
+      border-bottom: 3px solid var(--pink);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px var(--shadow);
+    }
+    .header-logo {
+      max-height: 80px;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+    .header-tagline {
+      font-size: 13px;
+      color: var(--pink-dark);
+      margin-top: 6px;
+      letter-spacing: 1px;
+      font-weight: 500;
+    }
+
+    /* ── CATEGORY TABS ── */
+    .tabs-wrapper {
+      overflow-x: auto;
+      background: var(--white);
+      padding: 0 12px;
+      border-bottom: 2px solid var(--pink-light);
+      scrollbar-width: none;
+    }
+    .tabs-wrapper::-webkit-scrollbar { display: none; }
+    .tabs {
+      display: flex;
+      gap: 6px;
+      padding: 10px 0;
+      white-space: nowrap;
+    }
+    .tab-btn {
+      border: 2px solid var(--pink);
+      background: transparent;
+      color: var(--brown);
+      border-radius: 24px;
+      padding: 7px 18px;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      flex-shrink: 0;
+    }
+    .tab-btn.active, .tab-btn:hover {
+      background: var(--pink);
+      color: var(--white);
+    }
+
+    /* ── MAIN CONTENT ── */
+    .main { padding: 20px 14px 80px; max-width: 700px; margin: auto; }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 28px 0 14px;
+    }
+    .section-header h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--brown);
+    }
+    .section-header .en {
+      font-size: 13px;
+      color: var(--pink-dark);
+      font-weight: 500;
+    }
+    .section-line {
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, var(--pink), transparent);
+      border-radius: 2px;
+    }
+
+    /* ── ITEM CARD ── */
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 14px;
+    }
+    .item-card {
+      background: var(--white);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 3px 14px var(--shadow);
+      transition: transform .2s, box-shadow .2s;
+      cursor: default;
+    }
+    .item-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px var(--shadow); }
+
+    .item-img-wrap {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--pink-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .item-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .item-img-wrap .no-img {
+      font-size: 44px;
+    }
+
+    .item-info {
+      padding: 10px 12px 12px;
+    }
+    .item-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--brown);
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+    .item-desc {
+      font-size: 12px;
+      color: var(--brown-mid);
+      line-height: 1.5;
+      margin-bottom: 8px;
+      min-height: 18px;
+    }
+    .item-price {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--pink-dark);
+    }
+    .item-price span { font-size: 11px; font-weight: 500; color: var(--brown-mid); }
+
+    /* LIST-STYLE for drinks (one-column) */
+    .items-list { display: flex; flex-direction: column; gap: 10px; }
+    .list-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 10px var(--shadow);
+    }
+    .list-card-left { display: flex; align-items: center; gap: 12px; }
+    .list-card-img {
+      width: 52px; height: 52px; border-radius: 10px;
+      object-fit: cover; background: var(--pink-light);
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      overflow: hidden; font-size: 26px;
+    }
+    .list-card-img img { width:100%; height:100%; object-fit:cover; }
+    .list-card-name { font-size: 14px; font-weight: 700; }
+    .list-card-desc { font-size: 12px; color: var(--brown-mid); margin-top: 2px; }
+    .list-card-price { font-size: 15px; font-weight: 800; color: var(--pink-dark); white-space: nowrap; }
+
+    /* ── LOADING / EMPTY ── */
+    .loading-wrap, .empty-wrap {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--brown-mid);
+    }
+    .spinner {
+      width: 40px; height: 40px;
+      border: 4px solid var(--pink-light);
+      border-top-color: var(--pink);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      margin: 0 auto 14px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── FOOTER ── */
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--pink-dark);
+      font-size: 12px;
+      background: var(--white);
+      margin-top: 30px;
+      border-top: 2px solid var(--pink-light);
+    }
+
+    /* ── SECTION HIDDEN ── */
+    .section-block { display: none; }
+    .section-block.visible { display: block; }
+
+    /* ── SCROLLBAR STYLE ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--pink-light); }
+    ::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <img class="header-logo" id="logoImg" src="" alt="Cookies and More" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍪</text></svg>'" />
+  <div class="header-tagline">cookies and more menu</div>
+</header>
+
+<div class="tabs-wrapper">
+  <div class="tabs" id="tabsContainer">
+    <div class="loading-wrap" style="padding:10px 0; color:#c47fa0; font-size:13px;">جاري التحميل...</div>
+  </div>
+</div>
+
+<main class="main" id="mainContent">
+  <div class="loading-wrap">
+    <div class="spinner"></div>
+    <p>جاري تحميل المنيو...</p>
+  </div>
+</main>
+
+<footer class="footer">
+  🍪 Cookies and More &nbsp;·&nbsp; جميع الأسعار بالدينار العراقي
+</footer>
+
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyB7gWMhUyeGpetM08tI21dUnJ7nKTiyISk",
+    authDomain: "cookis-de726.firebaseapp.com",
+    projectId: "cookis-de726",
+    storageBucket: "cookis-de726.firebasestorage.app",
+    messagingSenderId: "504074528720",
+    appId: "1:504074528720:web:77b7f9cda275c8328e7bd5",
+    measurementId: "G-RXWSLQ4LS0",
+    databaseURL: "https://cookis-de726-default-rtdb.firebaseio.com"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getDatabase(app);
+
+  // ── Load logo ──
+  onValue(ref(db, 'settings/logo'), snap => {
+    const logo = snap.val();
+    if (logo) document.getElementById('logoImg').src = logo;
+  });
+
+  // ── Load categories + items ──
+  onValue(ref(db, 'menu'), snap => {
+    const data = snap.val();
+    renderMenu(data || {});
+  });
+
+  function renderMenu(data) {
+    const categories = Object.entries(data)
+      .sort((a, b) => (a[1].order || 0) - (b[1].order || 0));
+
+    const tabsEl   = document.getElementById('tabsContainer');
+    const mainEl   = document.getElementById('mainContent');
+
+    if (!categories.length) {
+      tabsEl.innerHTML = '';
+      mainEl.innerHTML = '<div class="empty-wrap"><p style="font-size:40px">🍪</p><p style="margin-top:12px">المنيو فارغ حالياً</p></div>';
+      return;
+    }
+
+    tabsEl.innerHTML = '';
+    mainEl.innerHTML = '';
+
+    categories.forEach(([catId, cat], idx) => {
+      // tab button
+      const btn = document.createElement('button');
+      btn.className = 'tab-btn' + (idx === 0 ? ' active' : '');
+      btn.textContent = cat.nameAr || cat.name || catId;
+      btn.dataset.target = 'cat-' + catId;
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.section-block').forEach(s => s.classList.remove('visible'));
+        btn.classList.add('active');
+        document.getElementById('cat-' + catId)?.classList.add('visible');
+        document.getElementById('cat-' + catId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      tabsEl.appendChild(btn);
+
+      // section block
+      const section = document.createElement('div');
+      section.className = 'section-block' + (idx === 0 ? ' visible' : '');
+      section.id = 'cat-' + catId;
+
+      // section header
+      const hdr = document.createElement('div');
+      hdr.className = 'section-header';
+      hdr.innerHTML = `
+        <h2>${cat.nameAr || cat.name || catId}</h2>
+        ${cat.nameEn ? `<span class="en">${cat.nameEn}</span>` : ''}
+        <div class="section-line"></div>
+      `;
+      section.appendChild(hdr);
+
+      // items
+      const items = Object.entries(cat.items || {})
+        .sort((a, b) => (a[1].order || 0) - (b[1].order || 0));
+
+      const listMode = cat.listMode || false;
+
+      if (!items.length) {
+        section.innerHTML += '<div class="empty-wrap" style="padding:30px 0"><p>لا توجد عناصر في هذا القسم</p></div>';
+      } else if (listMode) {
+        const list = document.createElement('div');
+        list.className = 'items-list';
+        items.forEach(([, item]) => {
+          list.appendChild(buildListCard(item));
+        });
+        section.appendChild(list);
+      } else {
+        const grid = document.createElement('div');
+        grid.className = 'items-grid';
+        items.forEach(([, item]) => {
+          grid.appendChild(buildGridCard(item));
+        });
+        section.appendChild(grid);
+      }
+
+      mainEl.appendChild(section);
+    });
+  }
+
+  function buildGridCard(item) {
+    const card = document.createElement('div');
+    card.className = 'item-card';
+    const imgContent = item.image
+      ? `<img src="${item.image}" alt="${item.name}" loading="lazy" />`
+      : `<span class="no-img">🍪</span>`;
+    card.innerHTML = `
+      <div class="item-img-wrap">${imgContent}</div>
+      <div class="item-info">
+        <div class="item-name">${item.name || ''}</div>
+        ${item.desc ? `<div class="item-desc">${item.desc}</div>` : '<div class="item-desc"></div>'}
+        <div class="item-price">${formatPrice(item.price)} <span>د.ع</span></div>
+      </div>
+    `;
+    return card;
+  }
+
+  function buildListCard(item) {
+    const card = document.createElement('div');
+    card.className = 'list-card';
+    const imgContent = item.image
+      ? `<img src="${item.image}" alt="${item.name}" />`
+      : `<span style="font-size:26px">☕</span>`;
+    card.innerHTML = `
+      <div class="list-card-left">
+        <div class="list-card-img">${imgContent}</div>
+        <div>
+          <div class="list-card-name">${item.name || ''}</div>
+          ${item.desc ? `<div class="list-card-desc">${item.desc}</div>` : ''}
+        </div>
+      </div>
+      <div class="list-card-price">${formatPrice(item.price)} <span style="font-size:11px;font-weight:500;color:#7a4a2e">د.ع</span></div>
+    `;
+    return card;
+  }
+
+  function formatPrice(p) {
+    if (!p && p !== 0) return '—';
+    return Number(p).toLocaleString('ar-IQ');
+  }
+</script>
+</body>
+</html>
